@@ -165,7 +165,8 @@ print(b)# {0: True, 3: False, 6: True, 9: False}
 ```python
 # your code here
    
-   
+ans = [i for i in range(1500, 2700) if i % 7 == 0 and i % 5 == 0]
+print(ans)
    
 ```
 
@@ -201,7 +202,31 @@ D<br>
 ```python
 # your code here
    
+#v1 = rabit's speed, v2 = turtle's speed,
+#t = trigger distance, s = sleep time, l = total distance
+#result = T(turtle) or R(rabbit) or D(draw)
 
+
+d1, d2 = 0, 0#rabbit's distance, turtle's distance
+time = 0
+parms = input().split()
+v1, v2, t, s, l = (int(n) for n in parms)
+
+while d1 < l and d2 < l:
+    if d1 - d2 >= t:
+        d1 -= v1 * s #睡s秒相当于回退s秒的路程
+    time += 1
+    d1 += v1
+    d2 += v2
+
+if d1 == d2:
+    print("D")
+elif d1 > d2:
+    print("R")
+else:
+    print("T")
+
+print(time)
    
 ```
    
