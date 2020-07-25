@@ -56,6 +56,8 @@
 
 ![](https://img-blog.csdnimg.cn/20200710131404548.png)
 
+&emsp;
+
 ### Python标准警告总结
 
 - Warning：警告的基类
@@ -69,6 +71,8 @@
 - UnicodeWarning：与Unicode相关的警告
 - BytesWarning：与字节或字节码相关的警告
 - ResourceWarning：与资源使用相关的警告
+
+&emsp;
 
 ### 相关语句介绍
 
@@ -107,6 +111,8 @@ except (OSError, TypeError, ValueError) as error:
     print('出错了！\n原因是：' + str(error))
 ```
 
+&emsp;
+
 * try - except - finally 语句
 
 ```python
@@ -123,6 +129,8 @@ finally:
 - 若try中跑出异常，又未被except接住，那么该异常将在finally执行结束后抛出。
 ’‘’
 ```
+
+&emsp;
 
 * try - except - else 语句
 
@@ -142,6 +150,8 @@ else:
 
 【说明】`else`语句的存在必须以`except`语句的存在为前提。
 
+&emsp;
+
 * raise语句
 
 Python 使用`raise`语句抛出一个指定的异常。
@@ -155,21 +165,35 @@ except NameError:
 # An exception flew by!
 ```
 
+&emsp;
+
 ---
 ## 练习
 
 ### 猜数字游戏
 
-**题目描述:**
+**题目描述：**
 
 电脑产生一个零到100之间的随机数字，然后让用户来猜，如果用户猜的数字比这个数字大，提示太大，否则提示太小，当用户正好猜中电脑会提示，"恭喜你猜到了这个数是......"。在用户每次猜测之前程序会输出用户是第几次猜测，如果用户输入的根本不是一个数字，程序会告诉用户"输入无效"。
 
-(尝试使用try catch异常处理结构对输入情况进行处理)
+注意：
+
+尝试使用异常处理结构对输入情况进行处理；
 
 获取随机数采用random模块。
 
-![](https://img-blog.csdnimg.cn/20200714230819193.png)
+```
+‘’‘
+输入输出形式：
+猜测一个0到100之间的整数.
+第1次猜,请输入一个整形数字:12
+太小
+第2次猜,请输入一个整形数字:98
+太大
+'''
+```
 
+**答：**
 ```python
 # your code here
    
