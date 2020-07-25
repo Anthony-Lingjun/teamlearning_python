@@ -197,9 +197,27 @@ except NameError:
 ```python
 # your code here
    
-   
-   
-   
+import random
+
+a = int(100 * random.random())
+i = 0
+print('猜测一个0到100之间的整数.')
+
+while True:
+    i += 1
+    num = input('第' + str(i) + '次猜,请输入一个整形数字:')
+    try:
+        num = int(num)
+    except ValueError:
+        print('输入无效')
+    else:
+        if num == a:
+            print('恭喜你猜到了这个数是' + str(a))
+            break
+        elif num < a:
+            print('太小')
+        elif num > a:
+            print('太大')
    
 ```
 
