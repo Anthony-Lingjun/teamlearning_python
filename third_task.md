@@ -73,6 +73,7 @@
 ### 相关语句介绍
 
 * try - except 语句
+
 ```python
 try:
     检测范围
@@ -86,56 +87,27 @@ except Exception[as reason]:
 3. 确定是否与except所指异常类型相符……
 4. 若否，则该异常向外层传递；若是，则执行匹配except的子句
 ’‘’
+```
 
-#reason即是引用该exception对象的变量，可用作打印，如
+【说明一】reason即是引用该exception对象的变量，可用作打印，如
+
+```python
 except OSError as error:
     print('打开文件出错\n原因是：' + str(error))
     #打开文件出错
     #原因是：[Errno 2] No such file or directory: 'test.txt'
 ```
 
-`try-except-else`语句尝试查询不在`dict`中的键值对，从而引发了异常。这一异常准确地说应属于`KeyError`，但由于`KeyError`是`LookupError`的子类，且将`LookupError`置于`KeyError`之前，因此程序优先执行该`except`代码块。所以，使用多个`except`代码块时，必须坚持对其规范排序，要从最具针对性的异常到最通用的异常。
+【说明二】使用多个`except`代码块时，必须坚持对其规范排序，要从最具针对性的异常到最通用的异常，以免针对性的异常判断位于父类异常判断之后导致无法被捕捉。
 
-
-【例子】
-
-```python
-dict1 = {'a': 1, 'b': 2, 'v': 22}
-try:
-    x = dict1['y']
-except KeyError:
-    print('键错误')
-except LookupError:
-    print('查询错误')
-else:
-    print(x)
-
-# 键错误
-```
-
-
-
-
-【例子】一个 `except` 子句可以同时处理多个异常，这些异常将被放在一个括号里成为一个元组。
+【说明三】一个 `except` 子句可以同时处理元组内的多个异常。
 
 ```python
-try:
-    s = 1 + '1'
-    int("abc")
-    f = open('test.txt')
-    print(f.read())
-    f.close()
 except (OSError, TypeError, ValueError) as error:
     print('出错了！\n原因是：' + str(error))
-
-# 出错了！
-# 原因是：unsupported operand type(s) for +: 'int' and 'str'
 ```
 
-
-
----
-## 4. try - except - finally 语句
+* try - except - finally 语句
 
 ```python
 try:
@@ -144,40 +116,15 @@ except Exception[as reason]:
     出现异常后的处理代码
 finally:
     无论如何都会被执行的代码
+    
+‘’‘
+语句的工作特性是
+- 不管try子句里面有没有发生异常，finally子句都会执行。
+- 若try中跑出异常，又未被except接住，那么该异常将在finally执行结束后抛出。
+’‘’
 ```
 
-不管`try`子句里面有没有发生异常，`finally`子句都会执行。
-
-如果一个异常在`try`子句里被抛出，而又没有任何的`except`把它截住，那么这个异常会在`finally`子句执行后被抛出。
-
-【例子】
-
-```python
-def divide(x, y):
-    try:
-        result = x / y
-        print("result is", result)
-    except ZeroDivisionError:
-        print("division by zero!")
-    finally:
-        print("executing finally clause")
-
-
-divide(2, 1)
-# result is 2.0
-# executing finally clause
-divide(2, 0)
-# division by zero!
-# executing finally clause
-divide("2", "1")
-# executing finally clause
-# TypeError: unsupported operand type(s) for /: 'str' and 'str'
-```
-
----
-## 5. try - except - else 语句
-
-如果在`try`子句执行时没有发生异常，Python将执行`else`语句后的语句。
+* try - except - else 语句
 
 ```python
 try:
@@ -186,43 +133,19 @@ except:
     出现异常后的处理代码
 else:
     如果没有异常执行这块代码
+    
+‘’‘
+语句的工作特性是
+- 如果在try子句执行时没有发生异常，Python将执行else语句后的语句。
+‘’‘
 ```
 
-使用`except`而不带任何异常类型，这不是一个很好的方式，我们不能通过该程序识别出具体的异常信息，因为它捕获所有的异常。
+【说明】`else`语句的存在必须以`except`语句的存在为前提。
 
-```python
-try:
-    检测范围
-except(Exception1[, Exception2[,...ExceptionN]]]):
-   发生以上多个异常中的一个，执行这块代码
-else:
-    如果没有异常执行这块代码
-```
-
-【例子】
-
-```python
-try:
-    fh = open("testfile", "w")
-    fh.write("这是一个测试文件，用于测试异常!!")
-except IOError:
-    print("Error: 没有找到文件或读取文件失败")
-else:
-    print("内容写入文件成功")
-    fh.close()
-
-# 内容写入文件成功
-```
-
-注意：`else`语句的存在必须以`except`语句的存在为前提，在没有`except`语句的`try`语句中使用`else`语句，会引发语法错误。
-
----
-## 6. raise语句
+* raise语句
 
 Python 使用`raise`语句抛出一个指定的异常。
 
-
-【例子】
 ```python
 try:
     raise NameError('HiThere')
@@ -232,32 +155,29 @@ except NameError:
 # An exception flew by!
 ```
 
-
-
-* if 语句
-```python
-if expression:
-    expr_true_suite
-```
-
-* if - else 语句
-```python
-if expression:
-    expr_true_suite
-else:
-    expr_false_suite
-```
-
+---
 ## 练习
 
-### 1、编写一个Python程序来查找那些既可以被7整除又可以被5整除的数字，介于1500和2700之间。
+### 猜数字游戏
+
+**题目描述:**
+
+电脑产生一个零到100之间的随机数字，然后让用户来猜，如果用户猜的数字比这个数字大，提示太大，否则提示太小，当用户正好猜中电脑会提示，"恭喜你猜到了这个数是......"。在用户每次猜测之前程序会输出用户是第几次猜测，如果用户输入的根本不是一个数字，程序会告诉用户"输入无效"。
+
+(尝试使用try catch异常处理结构对输入情况进行处理)
+
+获取随机数采用random模块。
+
+![](https://img-blog.csdnimg.cn/20200714230819193.png)
 
 ```python
 # your code here
    
-ans = [i for i in range(1500, 2700) if i % 7 == 0 and i % 5 == 0]
-print(ans)
+   
+   
+   
    
 ```
+
    
    
