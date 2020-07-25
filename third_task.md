@@ -54,8 +54,7 @@
 
 异常体系内部有层次关系，Python异常体系中的部分关系如下所示：
 
-!(https://github.com/Anthony-Lingjun/teamlearning_python/edit/master/fig1.png)
-
+![](https://img-blog.csdnimg.cn/20200710131404548.png)
 
 ### Python标准警告总结
 
@@ -73,86 +72,28 @@
 
 ### 相关语句介绍
 
----
-## 3. try - except 语句
+* try - except 语句
 ```python
 try:
     检测范围
 except Exception[as reason]:
     出现异常后的处理代码
-```
+    
+‘’‘
+语句的工作方式是
+1. 检查在try子句的执行过程中是否有异常发生……
+2. 若无，则执行完结束，不执行except内容；若有，则跳过余下部分，并进一步判断
+3. 确定是否与except所指异常类型相符……
+4. 若否，则该异常向外层传递；若是，则执行匹配except的子句
+’‘’
 
-try 语句按照如下方式工作：
-- 首先，执行`try`子句（在关键字`try`和关键字`except`之间的语句）
-- 如果没有异常发生，忽略`except`子句，`try`子句执行后结束。
-- 如果在执行`try`子句的过程中发生了异常，那么`try`子句余下的部分将被忽略。如果异常的类型和`except`之后的名称相符，那么对应的`except`子句将被执行。最后执行`try`语句之后的代码。
-- 如果一个异常没有与任何的`except`匹配，那么这个异常将会传递给上层的`try`中。
-
-【例子】
-
-```python
-try:
-    f = open('test.txt')
-    print(f.read())
-    f.close()
-except OSError:
-    print('打开文件出错')
-
-# 打开文件出错
-```
-
-【例子】
-
-```python
-try:
-    f = open('test.txt')
-    print(f.read())
-    f.close()
+#reason即是引用该exception对象的变量，可用作打印，如
 except OSError as error:
     print('打开文件出错\n原因是：' + str(error))
-
-# 打开文件出错
-# 原因是：[Errno 2] No such file or directory: 'test.txt'
+    #打开文件出错
+    #原因是：[Errno 2] No such file or directory: 'test.txt'
 ```
 
-一个`try`语句可能包含多个`except`子句，分别来处理不同的特定的异常。最多只有一个分支会被执行。
-
-【例子】
-
-```python
-try:
-    int("abc")
-    s = 1 + '1'
-    f = open('test.txt')
-    print(f.read())
-    f.close()
-except OSError as error:
-    print('打开文件出错\n原因是：' + str(error))
-except TypeError as error:
-    print('类型出错\n原因是：' + str(error))
-except ValueError as error:
-    print('数值出错\n原因是：' + str(error))
-
-# 数值出错
-# 原因是：invalid literal for int() with base 10: 'abc'
-```
-
-
-【例子】
-
-```python
-dict1 = {'a': 1, 'b': 2, 'v': 22}
-try:
-    x = dict1['y']
-except LookupError:
-    print('查询错误')
-except KeyError:
-    print('键错误')
-else:
-    print(x)
-
-# 查询错误
-```
 `try-except-else`语句尝试查询不在`dict`中的键值对，从而引发了异常。这一异常准确地说应属于`KeyError`，但由于`KeyError`是`LookupError`的子类，且将`LookupError`置于`KeyError`之前，因此程序优先执行该`except`代码块。所以，使用多个`except`代码块时，必须坚持对其规范排序，要从最具针对性的异常到最通用的异常。
 
 
