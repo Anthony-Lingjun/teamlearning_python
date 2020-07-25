@@ -54,6 +54,8 @@
 
 异常体系内部有层次关系，Python异常体系中的部分关系如下所示：
 
+!(https://github.com/Anthony-Lingjun/teamlearning_python/edit/master/fig1.png)
+
 
 ### Python标准警告总结
 
