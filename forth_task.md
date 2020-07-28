@@ -206,12 +206,12 @@
 - 创建：
 
   - 以`(a, b, c)`形式创建。
-- `tuple(range(...)) or tuple(推导式)`
+  - `tuple(range(...)) or tuple(推导式)`
   
 - 注意：
 
   - 可以什么符号也没有创建元组，但是可读性不强，如`x = 1, 2, 3, 4`
-- 元组中只包含一个元素时，需要在元素后面添加逗号，如`x = (1,)`
+  - 元组中只包含一个元素时，需要在元素后面添加逗号，如`x = (1,)`
   - 不可直接用括号进行基于推导式的创建，这样会返回生成器对象，必须加`tuple`
 
 #### 元组操作：更新、删除和获取元素
@@ -233,9 +233,9 @@
   - 可以通过切片和索引取得元素，或者截取元组的部分，拼接新的元组。
 
     ```python
-  week = ('Monday', 'Tuesday', 'Thursday', 'Friday')
+    week = ('Monday', 'Tuesday', 'Thursday', 'Friday')
     week = week[:2] + ('Wednesday',) + week[2:]
-  print(week)  # ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
+    print(week)  # ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
     ```
   
 
@@ -256,7 +256,7 @@
   - 元组的解压
 
     ```python
-  #解压（unpack）一维元组，有几个元素左边括号定义几个变量（可以不用括号）；
+    #解压（unpack）一维元组，有几个元素左边括号定义几个变量（可以不用括号）；
     t = (1, 10.31, 'python')
     (a, b, c) = t # a = 1, b = 10.31, c = 'python'
     #解压二维元组（按照元组里的元组结构来定义变量）
