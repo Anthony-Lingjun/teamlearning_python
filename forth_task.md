@@ -451,7 +451,24 @@ lst = [2, 5, 6, 7, 8, 9, 2, 9, 9]
 5. 翻转列表里的所有元素
 6. 对列表里的元素进行排序，从小到大一次，从大到小一次
 
+```python
+lst = [2, 5, 6, 7, 8, 9, 2, 9, 9]
 
+lst.append(15)
+print(lst)
+lst.insert(int(len(lst)/2), 20)
+print(lst)
+lst.extend([2, 5, 6])
+print(lst)
+lst.pop(3)
+print(lst)
+lst.reverse()
+print(lst)
+lst.sort()
+print(lst)
+lst.sort(reverse=True)
+print(lst)
+```
 
 #### 2、修改列表
 
@@ -461,7 +478,21 @@ lst = [1, [4, 6], True]
 
 请将列表里所有数字修改成原来的两倍
 
+```python
+def doub(lst: list):
+    for i,item in enumerate(lst):
+        if type(item) != list:
+            if type(item) == int or type(item) == float:
+                lst[i] *= 2
+            else:
+                continue
+        else:
+            doub(lst[i])
 
+lst = [1, [4, 6], True]
+doub(lst)
+print(lst)
+```
 
 #### 3、leetcode 852题 山脉数组的峰顶索引
 
@@ -488,10 +519,12 @@ lst = [1, [4, 6], True]
 ```python
 class Solution:
     def peakIndexInMountainArray(self, A: List[int]) -> int:
-       
-    # your code here
+        peak = 0
+        for i in range(1, len(A)-1):
+            if A[i] - A[i-1] ^ A[i+1] - A[i] < 0:
+                peak = i if peak == 0 else -1
+        return peak
 ```
-
 
 
 ### 元组练习题：
@@ -502,12 +535,16 @@ class Solution:
 
 ```python
 (1, 2)*2
+#(1, 2, 1, 2) type: tuple
 (1, )*2
+#(1, 1) type: tuple
 (1)*2
+#2
 ```
 
 分析为什么会出现这样的结果.
 
+答：前两行符合元组的形式，通过`*`进行了重复，而第三行在单个元素时未加逗号，因此不符合元组的形式，只是简单的算术计算。
 
 
 #### 2、拆包过程是什么？
@@ -516,6 +553,11 @@ class Solution:
 a, b = 1, 2
 ```
 
+上述过程属于拆包吗？
+
+可迭代对象拆包时，怎么赋值给占位符？
+
+答：对于元组中的数据，通过一组变量对应地获取，就是拆包。上述过程属于拆包。除其他已知变量的赋值之外的元素们，作为列表被赋值给占位符。
 
 
 ### 字符串练习题：
@@ -526,6 +568,11 @@ a, b = 1, 2
 - 怎么把字符串按照空格进⾏拆分？
 - 怎么去除字符串⾸位的空格？
 
+答：
+
+1. `replace(old, new [, max])`，可以将字符串中的old替换为new，可指定最大次数。
+2. `split(str="", num)` 默认以空格为分隔符切片字符串，返回切片后的子字符串拼接的列表。
+3. `lstrip([chars])` 可去除字符串⾸位的空格。
 
 
 #### 2、实现isdigit函数
@@ -542,7 +589,10 @@ def isdigit(string):
     :return:
     """
     # your code here
-    pass
+    for c in string:
+        if c not in '0123456789':
+            return False
+    return True
 ```
 
 
@@ -566,6 +616,29 @@ class Solution:
    def longestPalindrome(self, s: str) -> str:
           
     # your code here
+    n = len(s)
+    if n == 0:
+        return ""
+    res = s[0]
+    mid = 0
+    while mid < n:
+
+        left, right = mid - 1, mid + 1
+      
+        while right < n and s[right] == s[mid]:
+            right += 1
+            mid += 1
+        while left >= 0 and right < n and s[left] == s[right]:
+            left -= 1
+            right += 1
+        if right - left - 1 > len(res):
+            res = s[left+1:right]
+        mid += 1
+    return res
+
+s = 'cbbd'
+Sol = Solution()
+print(Sol.longestPalindrome(s))
 ```
 
    
