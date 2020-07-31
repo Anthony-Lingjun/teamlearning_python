@@ -96,7 +96,7 @@
   - 便捷法：`hash(X)`，不报错证明可哈希，即不可变，不可哈希即可变。
 
     ```python
-  x = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+    x = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
     del x[0:2]
     print(x)  # ['Wednesday', 'Thursday', 'Friday']
     ```
@@ -234,10 +234,10 @@
   - 形式上由`{}`括出，但只有键，而不是键值对。
   - 由于`key`不能重复，所以，在`set`中，**没有重复的`key`**。
 
-  ```python
-  num = {1, 2, 3, 4}
-  print(type(num))  # <class 'set'>
-  ```
+    ```python
+    num = {1, 2, 3, 4}
+    print(type(num))  # <class 'set'>
+    ```
 
 - 创建：
 
