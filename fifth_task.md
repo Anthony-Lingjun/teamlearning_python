@@ -361,16 +361,51 @@ dic = {
 用程序解答下面的题目
 
 - 字典的长度是多少
+  ```python
+  len(dic)
+  ```
 - 请修改'java' 这个key对应的value值为98
+  ```python
+  dic['java'] = 98
+  ```
 - 删除 c 这个key
+  ```python
+  del dic['c']
+  ```
 - 增加一个key-value对，key值为 php, value是90
+  ```python
+  dic['php'] = 90
+  ```
 - 获取所有的key值，存储在列表里
+  ```python
+  k = list(dic.keys())
+  ```
 - 获取所有的value值，存储在列表里
+  ```python
+  v = list(dic.values())
+  ```
 - 判断 javascript 是否在字典中
+  ```python
+  ans = 'javascript' in dic
+  ```
 - 获得字典里所有value 的和
+  ```python
+  s = 0
+  for key, value in dic.items():
+    s += value
+  ```
 - 获取字典里最大的value
+  ```python
+  len(dic)
+  ```
 - 获取字典里最小的value
+  ```python
+  len(dic)
+  ```
 - 字典 dic1 = {'php': 97}， 将dic1的数据更新到dic中
+  ```python
+  len(dic)
+  ```
   
 #### 2、字典中的value
 
