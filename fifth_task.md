@@ -396,15 +396,15 @@ dic = {
   ```
 - 获取字典里最大的value
   ```python
-  len(dic)
+  max(dic.values())
   ```
 - 获取字典里最小的value
   ```python
-  len(dic)
+  min(dic.values())
   ```
 - 字典 dic1 = {'php': 97}， 将dic1的数据更新到dic中
   ```python
-  len(dic)
+  dic.update(dic1)
   ```
   
 #### 2、字典中的value
