@@ -336,6 +336,16 @@
   - 如果各个迭代器的元素个数不一致，则返回列表**长度与最短的对象相同**，利用 `*` 号操作符，可以将元组解压为列表。
 
     ```python
+    a = [1, 2, 3]
+    b = [4, 5, 6]
+    c = [4, 5, 6, 7, 8]
+
+    zipped = zip(a, b)
+    print(zipped)  # <zip object at 0x000000C5D89EDD88>
+    print(list(zipped))  # [(1, 4), (2, 5), (3, 6)]
+    zipped = zip(a, c)
+    print(list(zipped))  # [(1, 4), (2, 5), (3, 6)]
+
     a1, a2 = zip(*zip(a, b))
     print(list(a1))  # [1, 2, 3]
     print(list(a2))  # [4, 5, 6]
@@ -423,19 +433,40 @@ data = {
 
 ```python
    
-def transfer_score(data):
-    # your code here
-
+def transfer_score(score_dict):#针对传入dict/list/str，方便递归调用
+    if type(score_dict) == dict:
+        for key, value in score_dict.items():
+            score_dict[key] = transfer_score(value)
+    elif type(score_dict) == list:
+        for i, value in enumerate(score_dict):
+            score_dict[i] = transfer_score(value)
+    elif type(score_dict) == str:
+        return int(score_dict)
+    return score_dict
 
 ```
 
 ### 集合练习题：
 
 1. 怎么表示只包含⼀个数字1的元组。
+`(1,)`
 2. 创建一个空集合，增加 {‘x’,‘y’,‘z’} 三个元素。
+```python
+ans = set()
+ans.update({'x','y','z'})
+```
 3. 列表['A', 'B', 'A', 'B']去重。
+```python
+ans = set(['A', 'B', 'A', 'B'])
+```
 4. 求两个集合{6, 7, 8}，{7, 8, 9}中不重复的元素（差集指的是两个集合交集外的部分）。
+```python
+ans = {6, 7, 8} ^ {7, 8, 9}
+```
 5. 求{'A', 'B', 'C'}中元素在 {'B', 'C', 'D'}中出现的次数。
+```python
+ans = len({'A', 'B', 'C'} & {'B', 'C', 'D'})
+```
 
 
 ### 序列练习题：
